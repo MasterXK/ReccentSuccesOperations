@@ -24,3 +24,14 @@ def get_date(date_time: str) -> str:
     pattern_out = '%d.%m.%Y'
     date = datetime.datetime.strptime(date_time, pattern_in) # 2018-07-11T02:26:18.671407 %Y-%m-%d %H:%M:%S.%f
     return datetime.datetime.strftime(date, pattern_out)
+
+
+def get_simillar_start_end_words(words: list[str]) -> list[str]:
+    simillar_atart_end_words = []
+    if words:
+        for word in words:
+            if word:
+                if word[0] == word[-1]:
+                    simillar_atart_end_words.append(word)
+        return simillar_atart_end_words
+    return []

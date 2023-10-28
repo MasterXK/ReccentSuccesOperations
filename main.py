@@ -16,6 +16,7 @@ def main():
     print(widget.make_operation_name('Visa Classic 6831982476737658'))
     print(widget.make_operation_name('Счет 35383033474447895560'))
     print(widget.get_date('2018-07-11T02:26:18.671407'))
+    print(widget.get_simillar_start_end_words(['', 'madam', 'racecar', 'noon', 'level', '']))
 
 
 if __name__ == "__main__":
