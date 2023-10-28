@@ -1,4 +1,5 @@
 from . import masks
+import datetime
 
 
 def make_operation_name(operation: str) -> str:
@@ -16,3 +17,10 @@ def make_operation_name(operation: str) -> str:
         else:
             name.append(word)
     return ' '.join(name)
+
+
+def get_date(date_time: str) -> str:
+    pattern_in = '%Y-%m-%dT%H:%M:%S.%f'
+    pattern_out = '%d.%m.%Y'
+    date = datetime.datetime.strptime(date_time, pattern_in) # 2018-07-11T02:26:18.671407 %Y-%m-%d %H:%M:%S.%f
+    return datetime.datetime.strftime(date, pattern_out)
