@@ -35,3 +35,12 @@ def get_simillar_start_end_words(words: list[str]) -> list[str]:
                     simillar_atart_end_words.append(word)
         return simillar_atart_end_words
     return []
+
+
+def get_max_multiply(numbers: list[int]) -> int:
+    nums = sorted(numbers)
+    if len(nums) < 2:
+        return 0
+    if nums[-1] * nums[-2] > nums[0] * nums[1]:
+        return nums[-1] * nums[-2]
+    return nums[0] * nums[1]
