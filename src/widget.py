@@ -6,18 +6,14 @@ def make_operation_name(operation: str) -> str:
     """ Создает сообщение с названием карты и маской счета
         Возвращает: сообщение с типом карты(счета) и маской"""
     words = operation.split()
-    name = []
-    for i in range(len(words) - 1):
-        name.append(words[i])
-
     for letter in words[-1]:
         if not letter.isdigit():
             return 'Номер должен состоять из цифр'
     if len(words[-1]) == 16:
-        name.append(masks.create_card_mask(int(words[-1])))
+        words[-1] = masks.create_card_mask(int(words[-1]))
     else:
-        name.append(masks.create_account_mask(int(words[-1])))
-    return ' '.join(name)
+        words[-1] = masks.create_account_mask(int(words[-1]))
+    return ' '.join(words)
 
 
 def get_date(date_time: str) -> str:
