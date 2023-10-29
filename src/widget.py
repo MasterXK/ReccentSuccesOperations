@@ -7,17 +7,16 @@ def make_operation_name(operation: str) -> str:
         Возвращает: сообщение с типом карты(счета) и маской"""
     words = operation.split()
     name = []
-    for word in words:
-        if len(word) == 16 or len(word) == 20:
-            for letter in word:
-                if not letter.isdigit():
-                    return 'Номер должен состоять из цифр'
-            if len(word) == 16:
-                name.append(masks.create_card_mask(int(word)))
-            else:
-                name.append(masks.create_account_mask(int(word)))
-        else:
-            name.append(word)
+    for i in range(len(words) - 1):
+        name.append(words[i])
+
+    for letter in words[-1]:
+        if not letter.isdigit():
+            return 'Номер должен состоять из цифр'
+    if len(words[-1]) == 16:
+        name.append(masks.create_card_mask(int(words[-1])))
+    else:
+        name.append(masks.create_account_mask(int(words[-1])))
     return ' '.join(name)
 
 
