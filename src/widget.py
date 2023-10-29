@@ -3,6 +3,8 @@ import datetime
 
 
 def make_operation_name(operation: str) -> str:
+    """ Создает сообщение с названием карты и маской счета
+        Возвращает: сообщение с типом карты(счета) и маской"""
     words = operation.split()
     name = []
     for word in words:
@@ -20,24 +22,30 @@ def make_operation_name(operation: str) -> str:
 
 
 def get_date(date_time: str) -> str:
+    """ преобраззует сообщение datetime-формата к DD.MM.YY
+        Возвращает: сообщение вида DD.MM.YY """
     pattern_in = '%Y-%m-%dT%H:%M:%S.%f'
     pattern_out = '%d.%m.%Y'
-    date = datetime.datetime.strptime(date_time, pattern_in) # 2018-07-11T02:26:18.671407 %Y-%m-%d %H:%M:%S.%f
+    date = datetime.datetime.strptime(date_time, pattern_in)
     return datetime.datetime.strftime(date, pattern_out)
 
 
 def get_simillar_start_end_words(words: list[str]) -> list[str]:
-    simillar_atart_end_words = []
+    """ Фильтрует список слов
+        Возвращает: список слов с одиннаковой буквой в начале и конце"""
+    simillar_start_end_words = []
     if words:
         for word in words:
             if word:
                 if word[0] == word[-1]:
-                    simillar_atart_end_words.append(word)
-        return simillar_atart_end_words
+                    simillar_start_end_words.append(word)
+        return simillar_start_end_words
     return []
 
 
 def get_max_multiply(numbers: list[int]) -> int:
+    """ Ищет максимальное произведение чисел
+        Возвращает: масимальное произведение"""
     nums = sorted(numbers)
     if len(nums) < 2:
         return 0
