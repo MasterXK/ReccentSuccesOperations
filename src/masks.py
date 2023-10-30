@@ -2,7 +2,11 @@ import os
 
 
 def create_card_mask(card_number: int) -> str:
-    """Создает маску для карты с пробелами"""
+    """
+    Функция создает маску для карты
+    :param card_number: номер карты
+    :return: маска карты
+    """
     number_list = list(str(card_number))
     for i in range(len(number_list)):
         if 5 < i < 12:
@@ -18,14 +22,22 @@ def create_card_mask(card_number: int) -> str:
 
 
 def create_account_mask(account_number: int) -> str:
-    """Создает маску для счета"""
+    """
+    Функция создает маску для счета
+    :param account_number: номер счета
+    :return: маска счета
+    """
     account_mask = f"**{account_number % 10000}"
     return account_mask
 
 
 def get_dir_content(path: str = ".", count_all: bool = False) -> dict:
-    """Считает количество директорий и файлов.
-    Есди стоит флаг count_all, считает в глубину"""
+    """
+    Функция считает количество директорий и файлов.
+    :param path: директория для подсчета
+    :param count_all: флаг для подсчета в глубину
+    :return: словарь с количеством директорий и файлов
+    """
     content = {"files": 0, "folders": 0}
     for dir_path, dir_names, file_names in os.walk(path):
         # перебираем каталоги

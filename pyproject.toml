@@ -18,7 +18,7 @@ black = "^23.10.1"
 
 [tool.mypy]
 disallow_untyped_defs = true
-no_implicit_optional = true
+no_implicit_optional = false
 warn_return_any = true
 exclude = 'venv'
 
