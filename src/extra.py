@@ -22,7 +22,7 @@ def get_dir_content(path: str = ".", count_all: bool = False) -> dict:
     return content
 
 
-def get_similar_start_end_words(words: list[str]) -> list[str]:
+def get_similar(words: list[str]) -> list[str]:
     """
     Функция фильтрует список слов
     :param words: список слов
