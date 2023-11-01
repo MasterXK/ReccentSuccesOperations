@@ -13,8 +13,8 @@ def account():
 
 
 def test_create_card_mask(card):
-    assert create_card_mask(card) == '7000 79** **** 6361'
+    assert create_card_mask(card) == "7000 79** **** 6361"
 
 
 def test_create_account_mask(account):
-    assert create_account_mask(account) == '**4305'
+    assert create_account_mask(account) == "**4305"
