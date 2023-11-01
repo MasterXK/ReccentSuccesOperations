@@ -34,8 +34,8 @@ def orders():
 
 
 def test_get_dir_content():
-    assert get_dir_content(".") == {"files": 6, "folders": 7}
-    assert get_dir_content(".", count_all=True) == {"files": 2747, "folders": 340}
+    assert get_dir_content(".") == {"files": 5, "folders": 7}
+    assert get_dir_content(".", count_all=True) == {"files": 2763, "folders": 353}
 
 
 @pytest.mark.parametrize(
