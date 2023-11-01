@@ -29,33 +29,3 @@ def get_date(date_time: str) -> str:
     pattern_out = '%d.%m.%Y'
     date = datetime.datetime.strptime(date_time, pattern_in)
     return datetime.datetime.strftime(date, pattern_out)
-
-
-def get_similar_start_end_words(words: list[str]) -> list[str]:
-    """
-    Функция фильтрует список слов
-    :param words: список слов
-    :return: список слов с одиннаковой буквой в начале и конце
-        """
-    simillar_start_end_words = []
-    if words:
-        for word in words:
-            if word:
-                if word[0] == word[-1]:
-                    simillar_start_end_words.append(word)
-        return simillar_start_end_words
-    return []
-
-
-def get_max_multiply(numbers: list[int]) -> int:
-    """
-    Функция ищет максимальное произведение двух чисел
-    :param numbers: список чисел
-    :return: масимальное произведение
-    """
-    nums = sorted(numbers)
-    if len(nums) < 2:
-        return 0
-    if nums[-1] * nums[-2] > nums[0] * nums[1]:
-        return nums[-1] * nums[-2]
-    return nums[0] * nums[1]
