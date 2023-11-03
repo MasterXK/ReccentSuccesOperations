@@ -1,5 +1,6 @@
 import pytest
-from src.widget import make_operation_name, get_date
+
+from src.widget import get_date, make_operation_name
 
 
 @pytest.fixture

@@ -1,5 +1,6 @@
 import pytest
-from src.masks import create_card_mask, create_account_mask
+
+from src.masks import create_account_mask, create_card_mask
 
 
 @pytest.fixture
