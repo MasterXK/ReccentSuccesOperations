@@ -1,3 +1,6 @@
+from typing import Generator
+
+
 def filter_by_currency(_transactions: list[dict], currency: str = "USD") -> filter:
     """
     Функция создает итератор операций, в которых указана заданная валюта
@@ -8,7 +11,7 @@ def filter_by_currency(_transactions: list[dict], currency: str = "USD") -> filt
     return filter(lambda x: x['operationAmount']['currency']['code'] == currency, _transactions)
 
 
-def transaction_descriptions(_transactions: list[dict]):
+def transaction_descriptions(_transactions: list[dict]) -> Generator:
     """
     Функция создает итератор описания операций
     :param _transactions: список операций
@@ -17,7 +20,7 @@ def transaction_descriptions(_transactions: list[dict]):
     return (x['description'] for x in _transactions)
 
 
-def card_number_generator(start: int, end: int):
+def card_number_generator(start: int, end: int) -> Generator:
     """
     Функция генерирует номер карты
     :param start: начальное значение
