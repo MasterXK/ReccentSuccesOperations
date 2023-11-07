@@ -99,15 +99,16 @@ def test_filter_by_currency_rub(transactions):
 
 
 def tes_transaction_descriptions(transactions):
-    description = transaction_descriptions(transactions)
-    for _ in range(5):
-        assert next(description)
+    assert list(transaction_descriptions(transactions)) == ['Перевод организации',
+                                                            'Перевод со счета на счет',
+                                                            'Перевод со счета на счет',
+                                                            'Перевод с карты на карту',
+                                                            'Перевод организации']
 
 
 def test_card_number_generator(start=1, end=5):
-    for card_number in card_number_generator(1, 5):
-        assert card_number in ['0000 0000 0000 0001',
-                               '0000 0000 0000 0002',
-                               '0000 0000 0000 0003',
-                               '0000 0000 0000 0004',
-                               '0000 0000 0000 0005']
+    assert list(card_number_generator(1, 5)) == ['0000 0000 0000 0001',
+                                                 '0000 0000 0000 0002',
+                                                 '0000 0000 0000 0003',
+                                                 '0000 0000 0000 0004',
+                                                 '0000 0000 0000 0005']
