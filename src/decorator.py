@@ -14,7 +14,6 @@ def log(filename: str = None) -> Callable:
                 response += ' ok\n'
             except Exception as e:
                 response += f' error: {e}. Inputs: {args, kwargs}\n'
-            finally:
                 if filename:
                     with open(filename, 'a') as file:
                         file.write(response)
@@ -22,6 +21,15 @@ def log(filename: str = None) -> Callable:
                 else:
                     print(response)
                     return
+            else:
+                if filename:
+                    with open(filename, 'a') as file:
+                        file.write(response)
+                    return result
+                else:
+                    print(response)
+                    return result
+
         return inner
     return wrapper
 
@@ -32,4 +40,4 @@ if __name__ == '__main__':
         return x + y
 
 
-    my_function(1, '2')
+    print(my_function(1, '2'))
