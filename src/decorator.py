@@ -14,21 +14,14 @@ def log(filename: str = None) -> Callable:
                 response += ' ok'
             except Exception as e:
                 response += f' error: {e}. Inputs: {args, kwargs}'
-                if filename:
-                    with open(filename, 'a') as file:
-                        file.write(response + '\n')
-                    return
-                else:
-                    print(response)
-                    return
+                result = None
+            if filename:
+                with open(filename, 'a') as file:
+                    file.write(response + '\n')
+                return result
             else:
-                if filename:
-                    with open(filename, 'a') as file:
-                        file.write(response + '\n')
-                    return result
-                else:
-                    print(response)
-                    return result
+                print(response)
+                return result
 
         return inner
     return wrapper
