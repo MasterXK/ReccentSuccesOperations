@@ -3,7 +3,7 @@ import os
 
 from src.decorator import log
 
-FILENAME = os.path.join('..', 'data', 'Log.txt')
+FILENAME = os.path.join('.', 'data', 'Log.txt')
 
 
 def test_log_default_with_file():
