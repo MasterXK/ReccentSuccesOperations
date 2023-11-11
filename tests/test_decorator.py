@@ -1,7 +1,8 @@
 import os
 import time
-
 import pytest
+
+from typing import Generator
 
 from src.decorator import log
 
@@ -12,12 +13,12 @@ TESTS_LOG = os.path.join('.', 'data', 'test.txt')
                          [(1, 2, ' my_function ok'),
                           (1, '2',
                            " my_function error: TypeError. Inputs: ((1, '2'), {})")])
-def test_log_with_file(arg_1, arg_2, expected_result):
+def test_log_with_file(arg_1: int, arg_2: int | str, expected_result: str) -> None:
     if os.path.exists(TESTS_LOG):
         os.remove(TESTS_LOG)
 
     @log(TESTS_LOG)
-    def my_function(x, y):
+    def my_function(x: int, y: int) -> int:
         return x + y
 
     time_ = time.localtime()
@@ -33,12 +34,12 @@ def test_log_with_file(arg_1, arg_2, expected_result):
                          [(1, 2, ' my_function ok'),
                           (1, '2',
                            " my_function error: TypeError. Inputs: ((1, '2'), {})")])
-def test_log_default_without_file(capfd, arg_1, arg_2, expected_result):
+def test_log_default_without_file(capfd: Generator, arg_1: int, arg_2: int | str, expected_result: str) -> None:
     if os.path.exists(TESTS_LOG):
         os.remove(TESTS_LOG)
 
     @log()
-    def my_function(x, y):
+    def my_function(x: int, y: int) -> int:
         return x + y
 
     time_ = time.localtime()

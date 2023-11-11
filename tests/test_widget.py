@@ -4,7 +4,7 @@ from src.widget import get_date, make_operation_name
 
 
 @pytest.fixture
-def data():
+def data() -> str:
     return "2019-07-03T18:35:29.512364"
 
 
@@ -16,9 +16,9 @@ def data():
         ("Visa Platinum 8990922113665229", "Visa Platinum 8990 92** **** 5229"),
     ],
 )
-def test_make_operation_name(operation, expected_result):
+def test_make_operation_name(operation: str, expected_result: str) -> None:
     assert make_operation_name(operation) == expected_result
 
 
-def test_get_date(data):
+def test_get_date(data: str) -> None:
     assert get_date(data) == "03.07.2019"
