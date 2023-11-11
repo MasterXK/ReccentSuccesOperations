@@ -1,5 +1,0 @@
-11-10-2023 23:47:15 my_function error: unsupported operand type(s) for +: 'int' and 'str'. Inputs: ((1, '2'), {})
-11-10-2023 23:47:17 my_function error: unsupported operand type(s) for +: 'int' and 'str'. Inputs: ((1, '2'), {})
-11-10-2023 23:47:33 my_function ok
-11-11-2023 00:06:50 my_function ok
-11-11-2023 00:07:16 my_function ok
