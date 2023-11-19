@@ -6,6 +6,10 @@ from data.Constants import PATH_DATA
 
 
 def setup_logger() -> Logger:
+    """
+    Функция создает экземпляр Logger
+    :return: Logger
+    """
     logger = logging.getLogger(__name__)
 
     file_formatter = logging.Formatter('%(asctime)s %(filename)s %(levelname)s: %(message)s')

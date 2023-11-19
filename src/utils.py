@@ -7,6 +7,11 @@ logger = setup_logger()
 
 
 def get_info(json_path: str) -> list[dict]:
+    """
+    Функция считывает содержимое json-файла
+    :param json_path: пабсолютный путь до json-а
+    :return: содержимое json
+    """
     try:
         with open(json_path, encoding="UTF-8") as json_file:
             json_content = json.load(json_file)
@@ -29,10 +34,12 @@ def get_info(json_path: str) -> list[dict]:
 
 
 def get_transaction_sum(transaction: dict) -> float:
+    """
+    Функция выводит транзакцию в рублях
+    :param transaction: транзакция
+    :return: сумма транзакции
+    """
     if transaction["operationAmount"]["currency"]["code"] == "RUB":
         return float(transaction["operationAmount"]["amount"])
 
     raise ValueError("Транзация выполнена не в рублях. Укажите транзакцию в рублях")
-
-
-print(get_info(os.path.abspath("../data/test_1.json")))
