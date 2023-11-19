@@ -1,13 +1,15 @@
 import json
+import os
 
 import pytest
 
+from data.Constants import PATH_DATA
 from src.utils import get_info, get_transaction_sum
 
 
 @pytest.fixture
 def transaction_rub():
-    with open("./data/test_2.json", encoding="UTF-8") as json_file:
+    with open(os.path.join(PATH_DATA, "test_2.json"), encoding="UTF-8") as json_file:
         json_content = json.load(json_file)
 
     return json_content
@@ -15,7 +17,7 @@ def transaction_rub():
 
 @pytest.fixture
 def transaction_usd():
-    with open("./data/test_1.json", encoding="UTF-8") as json_file:
+    with open(os.path.join(PATH_DATA, "test_1.json"), encoding="UTF-8") as json_file:
         json_content = json.load(json_file)
 
     return json_content[0]
@@ -25,7 +27,7 @@ def transaction_usd():
     "json_path, expected_result",
     [
         (
-            "./data/test_1.json",
+            os.path.join(PATH_DATA, "test_1.json"),
             [
                 {
                     "id": 41428829,
@@ -36,11 +38,11 @@ def transaction_usd():
                     "from": "MasterCard 7158300734726758",
                     "to": "Счет 35383033474447895560",
                 }
-            ],
+            ]
         ),
-        ("./data/test_2.json", []),
-        ("./data/test_3.json", []),
-        ("./data/test_4.json", []),
+        (os.path.join(PATH_DATA, "test_2.json"), []),
+        (os.path.join(PATH_DATA, "test_3.json"), []),
+        (os.path.join(PATH_DATA, "test_4.json"), []),
     ],
 )
 def test_get_info(json_path, expected_result):

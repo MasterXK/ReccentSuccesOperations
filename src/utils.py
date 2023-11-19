@@ -1,20 +1,30 @@
 import json
+import os
+
+from src.logger import setup_logger
+
+logger = setup_logger()
 
 
 def get_info(json_path: str) -> list[dict]:
     try:
         with open(json_path, encoding="UTF-8") as json_file:
             json_content = json.load(json_file)
+            logger.debug("Получены данные")
 
-    except json.JSONDecodeError:
+    except json.JSONDecodeError as e:
+        logger.debug(f"Ошибка: {e}")
         return []
 
-    except FileNotFoundError:
+    except FileNotFoundError as e:
+        logger.debug(f"Ошибка: {e}")
         return []
 
     if type(json_content) is list:
+        logger.debug("Данные верны")
         return json_content
 
+    logger.debug("Ошибка: в файле не список")
     return []
 
 
@@ -23,3 +33,6 @@ def get_transaction_sum(transaction: dict) -> float:
         return float(transaction["operationAmount"]["amount"])
 
     raise ValueError("Транзация выполнена не в рублях. Укажите транзакцию в рублях")
+
+
+print(get_info(os.path.abspath("../data/test_1.json")))
