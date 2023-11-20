@@ -1,3 +1,8 @@
+from src.logger import setup_logger
+
+logger = setup_logger()
+
+
 def create_card_mask(card_number: int) -> str:
     """
     Функция создает маску для карты
@@ -15,6 +20,7 @@ def create_card_mask(card_number: int) -> str:
     del number_list[0]
 
     card_mask = "".join(number_list)
+    logger.debug("Создана маска для карты")
     return card_mask
 
 
@@ -25,4 +31,5 @@ def create_account_mask(account_number: int) -> str:
     :return: маска счета
     """
     account_mask = f"**{account_number % 10000}"
+    logger.debug("Создана маска для счета")
     return account_mask
