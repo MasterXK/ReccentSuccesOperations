@@ -1,12 +1,11 @@
 import json
+import pandas as pd
 import os
-
 from src.logger import setup_logger
-
 logger = setup_logger()
 
 
-def from_json(json_path: str) -> list[dict]:
+def read_json(json_path: str) -> list[dict]:
     """
     Функция считывает содержимое json-файла
     :param json_path: пабсолютный путь до json-а
@@ -18,18 +17,18 @@ def from_json(json_path: str) -> list[dict]:
             logger.debug("Получены данные")
 
     except json.JSONDecodeError as e:
-        logger.debug(f"Ошибка: {e}")
+        logger.error(f"Ошибка: {e}")
         return []
 
     except FileNotFoundError as e:
-        logger.debug(f"Ошибка: {e}")
+        logger.error(f"Ошибка: {e}")
         return []
 
     if type(json_content) is list:
         logger.debug("Данные верны")
         return json_content
 
-    logger.debug("Ошибка: в файле не список")
+    logger.error("Ошибка: в файле не список")
     return []
 
 
@@ -43,3 +42,23 @@ def get_sum(transaction: dict) -> float:
         return float(transaction["operationAmount"]["amount"])
 
     raise ValueError("Транзация выполнена не в рублях. Укажите транзакцию в рублях")
+
+
+def read_table(file_path: str) -> str | None:
+    if not os.path.exists(file_path):
+        logger.error('Файл не найден')
+        return None
+
+    _, ext = os.path.splitext(file_path)
+
+    if ext == '.csv':
+        data = pd.read_csv(file_path)
+
+    elif ext in ['.xls', '.xlsx']:
+        data = pd.read_excel(file_path)
+
+    else:
+        logger.error('Неизвестное расширение файла')
+        return None
+
+    return data.to_json(orient='records', force_ascii=False)
