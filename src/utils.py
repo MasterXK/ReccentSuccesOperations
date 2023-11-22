@@ -1,7 +1,10 @@
 import json
-import pandas as pd
 import os
+
+import pandas as pd
+
 from src.logger import setup_logger
+
 logger = setup_logger()
 
 
@@ -41,24 +44,24 @@ def get_sum(transaction: dict) -> float:
     if transaction["operationAmount"]["currency"]["code"] == "RUB":
         return float(transaction["operationAmount"]["amount"])
 
-    raise ValueError("Транзация выполнена не в рублях. Укажите транзакцию в рублях")
+    raise ValueError("Транзация выполнена не в рублях. " "Укажите транзакцию в рублях.")
 
 
 def read_table(file_path: str) -> str | None:
     if not os.path.exists(file_path):
-        logger.error('Файл не найден')
+        logger.error("Файл не найден")
         return None
 
     _, ext = os.path.splitext(file_path)
 
-    if ext == '.csv':
+    if ext == ".csv":
         data = pd.read_csv(file_path)
 
-    elif ext in ['.xls', '.xlsx']:
+    elif ext in [".xls", ".xlsx"]:
         data = pd.read_excel(file_path)
 
     else:
-        logger.error('Неизвестное расширение файла')
+        logger.error("Неизвестное расширение файла")
         return None
 
-    return data.to_json(orient='records', force_ascii=False)
+    return data.to_json(orient="records", force_ascii=False)
