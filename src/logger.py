@@ -2,15 +2,16 @@ import logging
 import os
 from logging import Logger
 
-from data.Constants import PATH_DATA
+from data import PATH_DATA
 
 
-def setup_logger() -> Logger:
+def setup_logger(name: str = __name__) -> Logger:
     """
     Функция создает экземпляр Logger
+    :param name:
     :return: Logger
     """
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger(name)
 
     file_formatter = logging.Formatter('%(asctime)s %(filename)s %(levelname)s: %(message)s')
     file_handler = logging.FileHandler(os.path.join(os.getcwd(), PATH_DATA, 'logs.log'), "w")
