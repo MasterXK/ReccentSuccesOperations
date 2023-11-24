@@ -1,3 +1,7 @@
+import re
+import collections
+
+
 def filter_by_state(operations: list[dict], state: str = "EXECUTED") -> list[dict]:
     """
     Фунция фильтрует список операций по статутсу
@@ -16,3 +20,7 @@ def sort_by_date(operations: list[dict], reverse_: bool = False) -> list[dict]:
     :return: отсортированный список операций
     """
     return sorted(operations, key=lambda x: x["date"], reverse=reverse_)
+
+
+def get_categories(transactions: list[dict]) -> dict:
+
