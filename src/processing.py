@@ -1,5 +1,4 @@
 import re
-import collections
 
 
 def filter_by_state(operations: list[dict], state: str = "EXECUTED") -> list[dict]:
@@ -22,15 +21,14 @@ def sort_by_date(operations: list[dict], reverse_: bool = False) -> list[dict]:
     return sorted(operations, key=lambda x: x["date"], reverse=reverse_)
 
 
-def get_categories(transactions: list[dict], key_word: str) -> dict:
+def get_transactions_by_key(transactions: list[dict], key_word: str) -> list[dict]:
     """
-    Функция разбивает транзакции по категориям со словом search_str
-    и считает количество транзакций в каждой полученной категории
+    Функция ищет транзакци, в описании которых есть search_str и возвращает их список
     :param transactions: список транзакций
     :param key_word: ключевое слово
-    :return: словарь {категория: количество}
+    :return: список транзакций
     """
-    suitable_descriptions = []
+    transactions_filtered = []
     pattern = re.compile(r'\b' + key_word.title() + r'\b')
 
     for transaction in transactions:
@@ -39,12 +37,35 @@ def get_categories(transactions: list[dict], key_word: str) -> dict:
                 continue
 
             else:
-                suitable_descriptions.append(transaction['description'])
+                transactions_filtered.append(transaction)
 
-        except KeyError as e:
+        except KeyError:
 
             continue
 
-    result = collections.Counter(suitable_descriptions)
+    return transactions_filtered
 
-    return dict(result)
+
+def get_categories(transactions: list[dict], categories: dict[str, int]) -> dict:
+    """
+    Функция делит транзакции по описанию на категории
+    и считает количество транзакций в каждой категории
+    :param categories: словарь с категориями
+    :param transactions: список транзакций
+    :return: словарь {категория: количество}
+    """
+    if all([type(x) is int for x in categories.values()]):
+        for transaction in transactions:
+            for category in categories:
+                try:
+                    if category in transaction['description']:
+                        categories[category] += 1
+
+                    else:
+                        continue
+
+                except KeyError:
+
+                    continue
+
+    return categories
