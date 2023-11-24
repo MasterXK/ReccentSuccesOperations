@@ -2,7 +2,7 @@ import logging
 import os
 from logging import Logger
 
-from data.Constants import PATH_DATA
+from data import PATH_DATA
 
 
 def setup_logger() -> Logger:

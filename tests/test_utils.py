@@ -3,8 +3,8 @@ import os
 
 import pytest
 
-from data.Constants import PATH_DATA
-from src.utils import get_info, get_transaction_sum
+from data import PATH_DATA
+from src.utils import read_json, get_sum
 
 
 @pytest.fixture
@@ -46,13 +46,13 @@ def transaction_usd():
     ],
 )
 def test_get_info(json_path, expected_result):
-    assert get_info(json_path) == expected_result
+    assert read_json(json_path) == expected_result
 
 
 def test_get_transaction_sum_correct(transaction_rub):
-    assert get_transaction_sum(transaction_rub) == 31957.58
+    assert get_sum(transaction_rub) == 31957.58
 
 
 def test_get_transaction_sum_err(transaction_usd):
     with pytest.raises(ValueError):
-        get_transaction_sum(transaction_usd)
+        get_sum(transaction_usd)

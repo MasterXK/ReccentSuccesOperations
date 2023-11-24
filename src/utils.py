@@ -2,11 +2,12 @@ import json
 import os
 
 from src.logger import setup_logger
+from data import PATH_DATA
 
 logger = setup_logger()
 
 
-def get_info(json_path: str) -> list[dict]:
+def read_json(json_path: str) -> list[dict]:
     """
     Функция считывает содержимое json-файла
     :param json_path: пабсолютный путь до json-а
@@ -33,7 +34,7 @@ def get_info(json_path: str) -> list[dict]:
     return []
 
 
-def get_transaction_sum(transaction: dict) -> float:
+def get_sum(transaction: dict) -> float:
     """
     Функция выводит транзакцию в рублях
     :param transaction: транзакция
