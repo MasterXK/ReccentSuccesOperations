@@ -1,6 +1,6 @@
 import os
 import time
-from typing import Generator
+from typing import Any
 
 import pytest
 
@@ -34,7 +34,7 @@ def test_log_with_file(arg_1: int, arg_2: int | str, expected_result: str) -> No
     "arg_1, arg_2, expected_result",
     [(1, 2, " my_function ok"), (1, "2", " my_function error: TypeError. Inputs: ((1, '2'), {})")],
 )
-def test_log_default_without_file(capfd: Generator, arg_1: int, arg_2: int | str, expected_result: str) -> None:
+def test_log_default_without_file(capsys: Any, arg_1: int, arg_2: int | str, expected_result: str) -> None:
     if os.path.exists(TESTS_LOG):
         os.remove(TESTS_LOG)
 
@@ -46,7 +46,7 @@ def test_log_default_without_file(capfd: Generator, arg_1: int, arg_2: int | str
 
     my_function(arg_1, arg_2)
 
-    captured = capfd.readouterr()
+    captured = capsys.readouterr()
     log_message = captured.out.strip()
     expect_log = time.strftime("%m-%d-%Y %H:%M:%S", time_) + expected_result
 

@@ -9,6 +9,7 @@ def log(filename: str = None) -> Callable:
     :param filename: пть к файлу для записи логов
     :return: результат декорируемой функции
     """
+
     def wrapper(func: Callable) -> Callable:
         @wraps(func)
         def inner(*args: Any, **kwargs: Any) -> Any:
