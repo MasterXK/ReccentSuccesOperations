@@ -2,12 +2,11 @@ import json
 import os
 
 from src.logger import setup_logger
-from data import PATH_DATA
 
 logger = setup_logger()
 
 
-def read_json(json_path: str) -> list[dict]:
+def read_json(json_path: str | os.PathLike) -> list[dict]:
     """
     Функция считывает содержимое json-файла
     :param json_path: пабсолютный путь до json-а

@@ -4,21 +4,21 @@ import os
 import pytest
 
 from data import PATH_DATA
-from src.utils import read_json, get_sum
+from src.utils import get_sum, read_json
 
 
 @pytest.fixture
-def transaction_rub():
+def transaction_rub() -> dict:
     with open(os.path.join(PATH_DATA, "test_2.json"), encoding="UTF-8") as json_file:
-        json_content = json.load(json_file)
+        json_content: dict = json.load(json_file)
 
     return json_content
 
 
 @pytest.fixture
-def transaction_usd():
+def transaction_usd() -> dict:
     with open(os.path.join(PATH_DATA, "test_1.json"), encoding="UTF-8") as json_file:
-        json_content = json.load(json_file)
+        json_content: list[dict] = json.load(json_file)
 
     return json_content[0]
 
@@ -45,14 +45,14 @@ def transaction_usd():
         (os.path.join(PATH_DATA, "test_4.json"), []),
     ],
 )
-def test_get_info(json_path, expected_result):
+def test_get_info(json_path: str | os.PathLike, expected_result: list) -> None:
     assert read_json(json_path) == expected_result
 
 
-def test_get_transaction_sum_correct(transaction_rub):
+def test_get_transaction_sum_correct(transaction_rub: dict) -> None:
     assert get_sum(transaction_rub) == 31957.58
 
 
-def test_get_transaction_sum_err(transaction_usd):
+def test_get_transaction_sum_err(transaction_usd: dict) -> None:
     with pytest.raises(ValueError):
         get_sum(transaction_usd)
