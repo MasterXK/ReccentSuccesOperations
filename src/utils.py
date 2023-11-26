@@ -69,7 +69,6 @@ def read_table(file_path: str | os.PathLike) -> dict | None:
         logger.error("Неизвестное расширение файла")
         return None
 
-    # operationAmount(currency( , ) + amount)
     df_operation_amount = data.loc[:, ["amount", "currency_name", "currency_code"]]
     data.drop(["amount", "currency_code", "currency_name"], axis=1, inplace=True)
 
